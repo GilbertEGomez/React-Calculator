@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Calculate } from './Calculate'
 
 function App() {
   const [stack, setStack] = useState([])
-  const [result,setResult] = useState(0)
+
   useEffect(() => {
     console.log(stack)
   }, [stack])
+  
+
 
   function onsubmission(e) {
     e.preventDefault()
@@ -26,6 +29,7 @@ function App() {
     }
   }
 
+
   return (
     <>
 
@@ -41,7 +45,8 @@ function App() {
     </div>
 
     <div>
-    <h2>{stack}</h2>
+    {stack}
+    {(stack.length > 0) && <Calculate stack = {stack}/>}
     </div>
     </>
     
