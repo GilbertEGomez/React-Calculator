@@ -6,18 +6,11 @@ import { Calculate } from './Calculate'
 
 function App() {
   const [stack, setStack] = useState([])
-
-  useEffect(() => {
-    console.log(stack)
-  }, [stack])
-  
-
-
   function onsubmission(e) {
     e.preventDefault()
-    console.log(e)
-    console.log(e.target[0])
-    console.log(e.target[0].value)
+   // console.log(e)
+    //console.log(e.target[0])
+    //console.log(e.target[0].value)
     let target2 = e.target[0].value
     let str_length = target2.length
     for (let i = 0; i < str_length; i++) {
@@ -46,7 +39,7 @@ function App() {
 
     <div>
     {stack}
-    {(stack.length > 0) && <Calculate stack = {stack}/>}
+    {stack.length > 0 && <Calculate stack = {stack}/>}
     </div>
     </>
     
