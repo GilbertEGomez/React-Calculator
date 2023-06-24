@@ -1,54 +1,56 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 export function Calculate({stack}) {
-
     const [result,setResult] = useState(0)
-    const [operation,setOperation] = useState('')
         useEffect(() => {
           if(stack.length > 0) {
             console.log('Calculating...')
             console.log(stack)
-            calculate_result()
           }
           }, [stack])
-          useEffect(() => {
-            result > 0 && console.log('Current Result is ' + result)
-            }, [result])
-            useEffect(() => {
-              operation !== '' && console.log('Current operation is ' + operation)
-              }, [operation])
+
+        useEffect(() => {
+          result > 0 && console.log('Current Result is ' + result)
+          }, [result])
 
     function calculate_result() {
         let length = stack.length
-        let popped_element
+        let popped_element = ''
+        let current_operator = ''
+        let current_result = 0
         let operators = ['+','-']
         console.log('length of stack received: ' + stack.length)
         for (let i = 0; i < length; i++) {
           popped_element = stack.pop()
 
          if (!isNaN(popped_element)){
-          setResult(() => parseInt(popped_element))
+         current_result = parseInt(popped_element)
         }
-        if (operation === '') {
+        if (current_operator === '') {
           for (let i = 0; i < operators.length && isNaN(popped_element); i++) {
             if (popped_element === operators[i]) {
               /* 
               TODO: match symbols, if a certain operator do math expression.
               */
-              setOperation(popped_element)
+              current_operator = operators[i]
               break;
             }
           }
-          if (operation !== '') {
+          if (current_operator !== '') {
             continue
           }
         }
-         if(operation !== '') {
-          if (operation === '+') setResult(result + parseInt(popped_element))
-          setOperation('')
+         if(current_operator !== '') {
+          if (current_operator === '+') current_result = current_result + parseInt(popped_element)
+          current_operator = ''
          } 
 
         }
+        setResult((previous_result) => previous_result + current_result)
+
+      }
+      if(stack.length > 0) {
+        calculate_result()
       }
 
     return (
