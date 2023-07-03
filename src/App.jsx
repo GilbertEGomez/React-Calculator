@@ -22,6 +22,10 @@ function App() {
     }
   }
 
+  function resetStack() {
+    setStack([])
+  }
+
 
   return (
     <>
@@ -40,6 +44,7 @@ function App() {
     <div>
     {stack}
     {stack.length > 0 && <Calculate stack = {stack}/>}
+    <button onClick={resetStack}>Reset</button>
     </div>
     </>
     

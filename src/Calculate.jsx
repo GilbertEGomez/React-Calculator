@@ -2,6 +2,10 @@ import { useEffect, useState, useRef } from 'react'
 import './App.css'
 export function Calculate({stack}) {
     const passed_stack = useRef([...stack]) //Needed as popping prop causes too many re-render and breaks the last result
+    if (passed_stack.current.toString() !== stack.toString())
+     { 
+      passed_stack.current = [...stack]
+    }
     const finalResult = useRef(0) // Result needs to be persistant too, otherwise it will become undefined or won't add future results.
         useEffect(() => {
           if(stack.length > 0) {
@@ -43,6 +47,7 @@ export function Calculate({stack}) {
         }
          if(current_operator !== '') { //If a operator is found, execute calculation and store it as the current result.
           if (current_operator === '+') current_result = current_result + parseInt(popped_element)
+          if (current_operator === '-') current_result = current_result - parseInt(popped_element)
           current_operator = ''
          } 
 
